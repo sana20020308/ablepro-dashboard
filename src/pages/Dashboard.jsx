@@ -75,7 +75,7 @@ export default function Dashboard() {
 
           <div className="md:w-auto flex justify-center md:justify-end">
             <img
-              src="https://cdn-icons-png.flaticon.com/512/5626/5626576.png"
+              src="public/Images/rocket.png"
               alt="Rocket"
               className="w-40 md:w-52 lg:w-56 drop-shadow-xl"
             />
@@ -84,51 +84,159 @@ export default function Dashboard() {
         <div className="absolute top-0 right-0 bg-white w-10 h-10 rounded-full translate-x-1/2 -translate-y-1/2 shadow-sm"></div>
       </section>
 
-      {/* ================= STAT CARDS ================= */}
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {cards.map((card, i) => (
-          <div
-            key={i}
-            className="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm hover:shadow-md transition"
-          >
-            <div className="flex justify-between items-center mb-2">
-              <h3 className="text-sm font-medium text-gray-500">
-                {card.title}
-              </h3>
-              <MoreVertical className="w-4 h-4 text-gray-400" />
-            </div>
-            <div className="flex items-end justify-between">
-              <p
-                className={`text-2xl font-bold ${
+{/* ================= STATISTICS CARDS ================= */}
+<section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
+  {[
+    {
+      title: "All Earnings",
+      value: "$30200",
+      change: "+30.6%",
+      color: "blue",
+      iconBg: "bg-blue-100",
+      iconColor: "text-blue-600",
+    },
+    {
+      title: "Page Views",
+      value: "290+",
+      change: "+30.6%",
+      color: "amber",
+      iconBg: "bg-amber-100",
+      iconColor: "text-amber-600",
+    },
+    {
+      title: "Total Task",
+      value: "14568",
+      change: "+30.6%",
+      color: "green",
+      iconBg: "bg-emerald-100",
+      iconColor: "text-emerald-600",
+    },
+    {
+      title: "Download",
+      value: "$30200",
+      change: "-30.6%",
+      color: "red",
+      iconBg: "bg-rose-100",
+      iconColor: "text-rose-600",
+    },
+  ].map((card, i) => (
+    <div
+      key={i}
+      className="bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition p-5"
+    >
+      {/* Header */}
+      <div className="flex justify-between items-start mb-4">
+        <div className="flex items-center space-x-3">
+          <div className={`p-3 rounded-xl ${card.iconBg}`}>
+            {/* Placeholder icon (you can replace with lucide-react) */}
+            <div
+              className={`w-5 h-5 ${card.iconColor}`}
+              dangerouslySetInnerHTML={{
+                __html:
                   card.color === "blue"
-                    ? "text-blue-600"
+                    ? "💰"
                     : card.color === "amber"
-                    ? "text-yellow-600"
+                    ? "📈"
                     : card.color === "green"
-                    ? "text-green-600"
-                    : "text-red-600"
-                }`}
-              >
-                {card.value}
-              </p>
-              <span
-                className={`flex items-center text-xs font-medium ${
-                  card.change.includes("-")
-                    ? "text-red-500"
-                    : "text-green-500"
-                }`}
-              >
-                {card.change.includes("-") ? (
-                  <ArrowDownRight className="w-3 h-3 mr-1" />
-                ) : (
-                  <ArrowUpRight className="w-3 h-3 mr-1" />
-                )}
-                {card.change}
-              </span>
-            </div>
+                    ? "📅"
+                    : "⬇️",
+              }}
+            ></div>
           </div>
-        ))}
-      </section>
+          <h3 className="text-sm font-semibold text-gray-800">
+            {card.title}
+          </h3>
+        </div>
+        <button className="text-gray-400 hover:text-gray-600">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-4 h-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M12 6v.01M12 12v.01M12 18v.01"
+            />
+          </svg>
+        </button>
+      </div>
+
+      {/* Chart Preview */}
+      <div className="flex flex-col items-start bg-gray-50 rounded-xl p-3">
+        {/* Fake Bar Chart (visual mimic) */}
+        <div className="flex items-end space-x-0.5 mb-3">
+          {[...Array(10)].map((_, i) => (
+            <div
+              key={i}
+              className={`w-1 rounded-sm ${
+                card.color === "blue"
+                  ? "bg-blue-500"
+                  : card.color === "amber"
+                  ? "bg-amber-500"
+                  : card.color === "green"
+                  ? "bg-emerald-500"
+                  : "bg-rose-500"
+              }`}
+              style={{ height: `${Math.random() * 20 + 10}px` }}
+            ></div>
+          ))}
+        </div>
+
+        {/* Value + Change */}
+        <div className="flex items-center justify-between w-full">
+          <span className="text-lg font-bold text-gray-900">
+            {card.value}
+          </span>
+          <span
+            className={`flex items-center text-xs font-medium ${
+              card.change.includes("-")
+                ? "text-rose-500"
+                : "text-emerald-500"
+            }`}
+          >
+            {card.change.includes("-") ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-3 h-3 mr-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M17 13l-5 5m0 0l-5-5m5 5V6"
+                />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-3 h-3 mr-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M7 11l5-5m0 0l5 5m-5-5v12"
+                />
+              </svg>
+            )}
+            {card.change}
+          </span>
+        </div>
+      </div>
+    </div>
+  ))}
+</section>
+
 
       {/* ================= CHART SECTION ================= */}
       <section className="grid grid-cols-1 lg:grid-cols-3 gap-6">
