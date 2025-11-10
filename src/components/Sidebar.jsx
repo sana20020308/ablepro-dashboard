@@ -13,14 +13,37 @@ import {
   Power,
   User,
   Menu,
+  BookOpen,
+  Users,
+  HelpCircle,
+  FileText,
+  Cube,
+  Flag,
+  Type,
+  PlusSquare,
+  Upload,
+  FileCheck,
+  Wand2,
+  Table,
+  List,
+  Grid,
+  Map,
+  CalendarDays,
+  MessageSquare,
+  ShoppingBag,
+  Folder,
+  Mail,
+  DollarSign,
+  Plane,
+  MoreHorizontal,
 } from "lucide-react";
 
 export default function Sidebar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <aside className="w-64 bg-gray-50 h-screen flex flex-col border-r border-gray-200">
-      {/* ================= LOGO SECTION ================= */}
+    <aside className="w-64 bg-gray-50 h-screen flex flex-col border-r border-gray-200 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+      {/* LOGO SECTION */}
       <div className="flex items-center justify-between px-6 py-5 border-b border-gray-200">
         <div className="flex items-center space-x-1">
           <h1 className="text-2xl font-bold text-blue-600">Able</h1>
@@ -33,8 +56,8 @@ export default function Sidebar() {
         </span>
       </div>
 
-      {/* ================= PROFILE SECTION ================= */}
-      <div className="relative flex flex-col items-center py-6 border-b border-gray-200">
+      {/* PROFILE SECTION */}
+      <div className="relative flex flex-col items-center py-6 border-b border-gray-200 px-4">
         <div className="w-16 h-16 rounded-full border-2 border-white shadow-md overflow-hidden">
           <img
             src="public/Images/avatar1.png"
@@ -42,7 +65,9 @@ export default function Sidebar() {
             className="w-full h-full object-cover"
           />
         </div>
-        <h2 className="text-sm font-semibold text-gray-900 mt-3">Jonh Smith</h2>
+        <h2 className="text-sm font-semibold text-gray-900 mt-3">
+          Jonh Smith
+        </h2>
         <p className="text-xs text-gray-500">Administrator</p>
 
         {/* 3-bar dropdown button */}
@@ -78,77 +103,152 @@ export default function Sidebar() {
         )}
       </div>
 
-      {/* ================= NAVIGATION ================= */}
-      <div className="flex-1 overflow-y-auto px-4 py-4">
-        {/* NAVIGATION TITLE */}
-        <h3 className="text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-3">
-          Navigation
-        </h3>
+      {/* SCROLLABLE MENU */}
+      <div className="flex-1 overflow-y-auto px-5 py-5 space-y-6">
+        {/* NAVIGATION */}
+        <SidebarTitle title="Navigation" />
+        <SidebarGroup
+          active
+          icon={<LayoutDashboard />}
+          label="Dashboard"
+          badge="2"
+          subItems={[
+            { name: "Default", active: true },
+            { name: "Analytics" },
+            { name: "Finance" },
+            { name: "Layouts", icon: <Layers /> },
+          ]}
+        />
 
-        {/* Dashboard group */}
-        <div className="space-y-1">
-          {/* Dashboard main */}
-          <button className="flex items-center justify-between w-full bg-blue-50 text-blue-600 px-3 py-2.5 rounded-xl font-medium shadow-sm">
-            <span className="flex items-center space-x-2">
-              <LayoutDashboard className="w-4 h-4" />
-              <span>Dashboard</span>
-            </span>
-            <span className="text-xs bg-blue-600 text-white rounded-full px-2 py-0.5 font-semibold">
-              2
-            </span>
-          </button>
+        {/* WIDGET */}
+        <SidebarTitle title="Widget" />
+        <SidebarLink icon={<BarChart2 />} label="Statistics" />
+        <SidebarLink icon={<Database />} label="Data" />
+        <SidebarLink icon={<PieChart />} label="Chart" />
 
-          {/* Sub items */}
-          <ul className="ml-5 mt-2 space-y-1 text-sm">
-            <li className="text-blue-600 flex items-center space-x-2 cursor-pointer">
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
-              <span>Default</span>
-            </li>
-            <li className="text-gray-500 flex items-center space-x-2 cursor-pointer hover:text-blue-600 transition">
-              <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
-              <span>Analytics</span>
-            </li>
-            <li className="text-gray-500 flex items-center space-x-2 cursor-pointer hover:text-blue-600 transition">
-              <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
-              <span>Finance</span>
-            </li>
-            <li className="text-gray-500 flex items-center space-x-2 cursor-pointer hover:text-blue-600 transition">
-              <Layers className="w-4 h-4" />
-              <span>Layouts</span>
-              <ChevronRight className="w-3 h-3 ml-auto" />
-            </li>
-          </ul>
-        </div>
+        {/* ADMIN PANEL */}
+        <SidebarTitle title="Admin Panel" />
+        <SidebarLink icon={<BookOpen />} label="Online Courses" />
+        <SidebarLink icon={<Users />} label="Membership" />
+        <SidebarLink icon={<CalendarDays />} label="Helpdesk" />
+        <SidebarLink icon={<FileText />} label="Invoice" />
 
-        {/* WIDGET SECTION */}
-        <h3 className="text-[11px] font-semibold text-gray-500 uppercase tracking-wider mt-6 mb-3">
-          Widget
-        </h3>
+        {/* UI COMPONENTS */}
+        <SidebarTitle title="UI Components" />
+        <SidebarLink icon={<Cube />} label="Components" />
+        <SidebarLink icon={<Flag />} label="Animation" />
+        <SidebarLink icon={<User />} label="Icons" />
 
-        <div className="space-y-1">
-          <button className="flex items-center space-x-2 text-gray-600 hover:text-blue-600 px-3 py-2 rounded-lg transition">
-            <BarChart2 className="w-4 h-4" />
-            <span>Statistics</span>
-          </button>
-          <button className="flex items-center space-x-2 text-gray-600 hover:text-blue-600 px-3 py-2 rounded-lg transition">
-            <Database className="w-4 h-4" />
-            <span>Data</span>
-          </button>
-          <button className="flex items-center space-x-2 text-blue-600 bg-blue-50 px-3 py-2 rounded-lg transition">
-            <PieChart className="w-4 h-4" />
-            <span>Chart</span>
-          </button>
-        </div>
+        {/* FORMS */}
+        <SidebarTitle title="Forms" />
+        <SidebarLink icon={<PlusSquare />} label="Form Elements" />
+        <SidebarLink icon={<Wand2 />} label="Form Plugins" />
+        <SidebarLink icon={<Type />} label="Text Editor" />
+        <SidebarLink icon={<Layers />} label="Form Layouts" />
+        <SidebarLink icon={<Upload />} label="File Upload" />
+        <SidebarLink icon={<ClipboardList />} label="Wizard" />
+        <SidebarLink icon={<FileCheck />} label="Form Validation" />
+        <SidebarLink icon={<CreditCard />} label="Images Cropper" />
 
-        {/* ADMIN PANEL SECTION */}
-        <h3 className="text-[11px] font-semibold text-gray-500 uppercase tracking-wider mt-6 mb-2">
-          Admin Panel
-        </h3>
-        <button className="flex items-center space-x-2 text-gray-600 hover:text-blue-600 px-3 py-2 rounded-lg transition">
-          <ClipboardList className="w-4 h-4" />
-          <span>Admin Settings</span>
-        </button>
+        {/* TABLES */}
+        <SidebarTitle title="Tables" />
+        <SidebarLink icon={<Table />} label="Bootstrap Table" />
+        <SidebarLink icon={<List />} label="Vanilla Table" />
+        <SidebarLink icon={<Grid />} label="Data Table" />
+        <SidebarLink icon={<ClipboardList />} label="DT extensions" />
+
+        {/* CHART & MAPS */}
+        <SidebarTitle title="Chart & Maps" />
+        <SidebarLink icon={<PieChart />} label="Charts" />
+        <SidebarLink icon={<Map />} label="Map" />
+
+        {/* APPLICATION */}
+        <SidebarTitle title="Application" />
+        <SidebarLink icon={<CalendarDays />} label="Calendar" />
+        <SidebarLink icon={<MessageSquare />} label="Chat" />
+        <SidebarLink icon={<User />} label="Customer" />
+        <SidebarLink icon={<ShoppingBag />} label="Ecommerce" />
+        <SidebarLink icon={<Folder />} label="File manager" />
+        <SidebarLink icon={<Mail />} label="Mail" />
+        <SidebarLink icon={<User />} label="User" />
+
+        {/* PAGES */}
+        <SidebarTitle title="Pages" />
+        <SidebarLink icon={<Shield />} label="Authentication" />
+        <SidebarLink icon={<Flag />} label="Maintenance" />
+        <SidebarLink icon={<CalendarDays />} label="Contact Us" />
+        <SidebarLink icon={<DollarSign />} label="Price" />
+        <SidebarLink icon={<Plane />} label="Landing" />
+
+        {/* OTHER */}
+        <SidebarTitle title="Other" />
+        <SidebarLink icon={<MoreHorizontal />} label="Menu levels" />
+        <SidebarLink icon={<FileText />} label="Sample Page" />
       </div>
     </aside>
+  );
+}
+
+/* COMPONENTS */
+function SidebarTitle({ title }) {
+  return (
+    <h3 className="text-[11px] font-semibold text-gray-600 uppercase tracking-wider mb-2">
+      {title}
+    </h3>
+  );
+}
+
+function SidebarGroup({ icon, label, badge, subItems, active }) {
+  return (
+    <div className="space-y-2">
+      <div
+        className={`flex items-center justify-between w-full ${
+          active
+            ? "bg-blue-50 text-blue-600"
+            : "text-gray-700 hover:text-blue-600"
+        } px-3 py-2.5 rounded-xl font-medium shadow-sm cursor-pointer`}
+      >
+        <span className="flex items-center space-x-2">
+          <span className="w-5 h-5">{icon}</span>
+          <span>{label}</span>
+        </span>
+        {badge && (
+          <span className="text-xs bg-blue-600 text-white rounded-full px-2 py-0.5 font-semibold">
+            {badge}
+          </span>
+        )}
+      </div>
+
+      {/* Sub Items */}
+      <ul className="ml-5 space-y-1 text-sm">
+        {subItems.map((item, i) => (
+          <li
+            key={i}
+            className={`flex items-center space-x-2 cursor-pointer ${
+              item.active
+                ? "text-blue-600"
+                : "text-gray-500 hover:text-blue-600"
+            }`}
+          >
+            <span
+              className={`w-1.5 h-1.5 rounded-full ${
+                item.active ? "bg-blue-600" : "bg-gray-300"
+              }`}
+            ></span>
+            <span>{item.name}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function SidebarLink({ icon, label }) {
+  return (
+    <div className="flex items-center text-[14px] text-gray-700 font-medium py-2 cursor-pointer group hover:text-blue-600">
+      <span className="text-gray-500 group-hover:text-blue-600 w-6">{icon}</span>
+      <span className="flex-1">{label}</span>
+      <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-blue-600" />
+    </div>
   );
 }
