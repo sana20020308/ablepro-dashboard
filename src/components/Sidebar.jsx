@@ -1,201 +1,251 @@
 import React, { useState } from "react";
-import { NavLink } from 'react-router-dom';
-import { 
-  LayoutDashboard, 
-  BarChart2, 
-  Users, 
-  Settings, 
-  FileText, 
+import {
+  LayoutDashboard,
+  Layers,
+  PieChart,
+  Database,
+  BarChart2,
+  BookOpen,
+  Users,
+  HelpCircle,
+  FileText,
+  Grid,
+  Type,
+  PlusSquare,
+  Upload,
+  FileCheck,
+  Wand2,
+  Table,
+  List,
+  Map,
   CalendarDays,
+  MessageSquare,
+  ShoppingBag,
+  Folder,
+  Mail,
   User,
-  Power,
-  Lock,
+  Shield,
+  Flag,
+  DollarSign,
+  Plane,
+  MoreHorizontal,
   ChevronRight,
   ChevronLeft,
-  Home,
-  Database,
-  PieChart,
-  Layers,
-  BookOpen
+  Power,
+  Settings,
+  Lock,
+  Box as Cube,
 } from "lucide-react";
 
-const menuItems = [
-  { 
-    title: 'Dashboard', 
-    icon: <LayoutDashboard className="w-5 h-5" />, 
-    path: '/',
-    subItems: [
-      { name: 'Default', path: '/' },
-      { name: 'Analytics', path: '/analytics' },
-      { name: 'CRM', path: '/crm' },
-    ]
-  },
-  { 
-    title: 'Users', 
-    icon: <Users className="w-5 h-5" />, 
-    path: '/users',
-    subItems: [
-      { name: 'All Users', path: '/users' },
-      { name: 'Add New', path: '/users/new' },
-    ]
-  },
-  { 
-    title: 'Reports', 
-    icon: <BarChart2 className="w-5 h-5" />, 
-    path: '/reports',
-    subItems: []
-  },
-  { 
-    title: 'Pages', 
-    icon: <FileText className="w-5 h-5" />, 
-    path: '/pages',
-    subItems: [
-      { name: 'Profile', path: '/profile' },
-      { name: 'Settings', path: '/settings' },
-    ]
-  },
-  { 
-    title: 'Calendar', 
-    icon: <CalendarDays className="w-5 h-5" />, 
-    path: '/calendar',
-    subItems: []
-  },
-];
-
 export default function Sidebar({ isOpen, toggleSidebar }) {
-  const [activeMenu, setActiveMenu] = useState('Dashboard');
-  const [openSubmenu, setOpenSubmenu] = useState(null);
+  const [openMenu, setOpenMenu] = useState(null);
+  const [profileMenu, setProfileMenu] = useState(false);
 
   const toggleSubmenu = (title) => {
-    setOpenSubmenu(openSubmenu === title ? null : title);
-    setActiveMenu(title);
+    setOpenMenu(openMenu === title ? null : title);
   };
 
+  const sections = [
+    {
+      title: "NAVIGATION",
+      items: [
+        { name: "Dashboard", icon: <LayoutDashboard />, badge: 2 },
+        { name: "Layouts", icon: <Layers />, hasArrow: true },
+      ],
+    },
+    {
+      title: "WIDGET",
+      items: [
+        { name: "Statistics", icon: <PieChart /> },
+        { name: "Data", icon: <Database /> },
+        { name: "Chart", icon: <BarChart2 /> },
+      ],
+    },
+    {
+      title: "ADMIN PANEL",
+      items: [
+        { name: "Online Courses", icon: <BookOpen />, hasArrow: true },
+        { name: "Membership", icon: <Users />, hasArrow: true },
+        { name: "Helpdesk", icon: <HelpCircle />, hasArrow: true },
+        { name: "Invoice", icon: <FileText />, hasArrow: true },
+      ],
+    },
+    {
+      title: "UI COMPONENTS",
+      items: [
+        { name: "Components", icon: <Cube />, hasArrow: true },
+        { name: "Animation", icon: <Flag /> },
+        { name: "Icons", icon: <Wand2 />, hasArrow: true },
+      ],
+    },
+    {
+      title: "FORMS",
+      items: [
+        { name: "Form Elements", icon: <PlusSquare />, hasArrow: true },
+        { name: "Form Plugins", icon: <Settings />, hasArrow: true },
+        { name: "Text Editor", icon: <Type /> },
+        { name: "Form Layouts", icon: <Grid />, hasArrow: true },
+        { name: "File Upload", icon: <Upload />, hasArrow: true },
+        { name: "Wizard", icon: <FileCheck />, hasArrow: true },
+        { name: "Form Validation", icon: <Lock />, hasArrow: true },
+        { name: "Images Cropper", icon: <Wand2 />, hasArrow: true },
+      ],
+    },
+    {
+      title: "TABLES",
+      items: [
+        { name: "Bootstrap Table", icon: <Table />, hasArrow: true },
+        { name: "Vanilla Table", icon: <List />, hasArrow: true },
+        { name: "Data Table", icon: <Database />, hasArrow: true },
+        { name: "DT Extensions", icon: <Layers />, hasArrow: true },
+      ],
+    },
+    {
+      title: "CHART & MAPS",
+      items: [
+        { name: "Charts", icon: <BarChart2 />, hasArrow: true },
+        { name: "Map", icon: <Map />, hasArrow: true },
+      ],
+    },
+    {
+      title: "APPLICATION",
+      items: [
+        { name: "Calendar", icon: <CalendarDays /> },
+        { name: "Chat", icon: <MessageSquare /> },
+        { name: "Customer", icon: <Users /> },
+        { name: "Ecommerce", icon: <ShoppingBag />, hasArrow: true },
+        { name: "File Manager", icon: <Folder /> },
+        { name: "Mail", icon: <Mail /> },
+        { name: "User", icon: <User />, hasArrow: true },
+      ],
+    },
+    {
+      title: "PAGES",
+      items: [
+        { name: "Authentication", icon: <Shield />, hasArrow: true },
+        { name: "Maintenance", icon: <Flag /> },
+        { name: "Contact Us", icon: <HelpCircle /> },
+        { name: "Price", icon: <DollarSign />, hasArrow: true },
+        { name: "Landing", icon: <Plane /> },
+      ],
+    },
+    {
+      title: "OTHER",
+      items: [
+        { name: "Menu Levels", icon: <List />, hasArrow: true },
+        { name: "Sample Page", icon: <FileText />, hasArrow: true },
+      ],
+    },
+  ];
+
   return (
-    <aside 
-      className={`bg-white h-screen flex flex-col border-r border-gray-200 transition-all duration-300 ${
-        isOpen ? 'w-64' : 'w-20'
+    <aside
+      className={`fixed top-0 left-0 z-40 h-screen flex flex-col bg-[#f8f9fa] border-r border-gray-200 transition-all duration-300 ${
+        isOpen ? "w-64" : "w-20"
       }`}
     >
-      {/* Logo */}
-      <div className="flex items-center justify-between p-4 border-b border-gray-200">
+      {/* Header */}
+      <div className="flex items-center justify-between px-4 py-3 border-b sticky top-0 bg-[#f8f9fa] z-10">
         {isOpen ? (
-          <div className="flex items-center space-x-2">
-            <h1 className="text-xl font-bold text-blue-600">Able</h1>
-            <span className="text-xs bg-blue-100 text-blue-600 px-1.5 py-0.5 rounded font-medium">
-              pro
+          <div className="flex items-center gap-1 text-blue-600 font-bold text-xl">
+            Able{" "}
+            <span className="text-xs bg-green-100 text-green-600 px-2 py-0.5 rounded-full font-semibold">
+              v1.2.0
             </span>
           </div>
         ) : (
-          <div className="w-8 h-8 bg-blue-600 rounded-md flex items-center justify-center text-white font-bold">
-            A
-          </div>
+          <span className="text-blue-600 font-bold text-2xl">A</span>
         )}
-        
-        <button 
+        <button
           onClick={toggleSidebar}
-          className="p-1 rounded-md hover:bg-gray-100 text-gray-500 hover:text-gray-700"
+          className="p-1 text-gray-500 hover:bg-gray-200 rounded"
         >
-          {isOpen ? (
-            <ChevronLeft className="w-5 h-5" />
-          ) : (
-            <ChevronRight className="w-5 h-5" />
-          )}
+          {isOpen ? <ChevronLeft /> : <ChevronRight />}
         </button>
       </div>
 
       {/* Profile */}
-      <div className="p-4 border-b border-gray-200">
-        <div className="flex items-center space-x-3">
-          <div className="relative">
-            <img
-              src="https://i.pravatar.cc/40"
-              alt="User"
-              className="w-10 h-10 rounded-full border-2 border-white shadow-sm"
-            />
-            <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></span>
-          </div>
+      <div className="p-4">
+        <div className="bg-white rounded-xl p-3 shadow-sm flex items-center gap-3 relative">
+          <img
+            src="https://i.pravatar.cc/100"
+            className="w-12 h-12 rounded-full"
+            alt="profile"
+          />
           {isOpen && (
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 truncate">John Doe</p>
-              <p className="text-xs text-gray-500">Admin</p>
+            <div className="flex-1">
+              <h4 className="font-semibold text-sm">Jonh Smith</h4>
+              <p className="text-xs text-gray-500">Administrator</p>
+            </div>
+          )}
+          <button onClick={() => setProfileMenu(!profileMenu)}>
+            <MoreHorizontal className="text-gray-500" />
+          </button>
+
+          {/* Profile menu */}
+          {profileMenu && (
+            <div className="absolute right-2 top-14 bg-white shadow-lg rounded-lg p-2 w-40 text-sm">
+              <button className="flex w-full px-2 py-2 hover:bg-gray-50 gap-2 items-center text-gray-700">
+                <User className="w-4" /> My Account
+              </button>
+              <button className="flex w-full px-2 py-2 hover:bg-gray-50 gap-2 items-center text-gray-700">
+                <Settings className="w-4" /> Settings
+              </button>
+              <button className="flex w-full px-2 py-2 hover:bg-gray-50 gap-2 items-center text-gray-700">
+                <Lock className="w-4" /> Lock Screen
+              </button>
+              <button className="flex w-full px-2 py-2 text-red-600 hover:bg-red-50 gap-2 items-center">
+                <Power className="w-4" /> Logout
+              </button>
             </div>
           )}
         </div>
       </div>
 
-      {/* Menu Items */}
-      <nav className="flex-1 overflow-y-auto py-2">
-        <ul className="space-y-1 px-2">
-          {menuItems.map((item) => (
-            <li key={item.title}>
-              <NavLink
-                to={item.path}
-                className={({ isActive }) =>
-                  `flex items-center justify-between px-3 py-2.5 text-sm font-medium rounded-lg transition-colors ${
-                    isActive
-                      ? 'bg-blue-50 text-blue-600'
-                      : 'text-gray-700 hover:bg-gray-50'
-                  }`
-                }
-                onClick={() => toggleSubmenu(item.title)}
+      {/* Scrollable Menu */}
+      <nav className="flex-1 overflow-y-auto px-3 pb-5 custom-scroll">
+        {sections.map((section) => (
+          <div key={section.title} className="mt-3">
+            {isOpen && (
+              <p className="text-[11px] font-bold text-gray-400 mb-2">
+                {section.title}
+              </p>
+            )}
+            {section.items.map((item) => (
+              <button
+                key={item.name}
+                onClick={() => toggleSubmenu(item.name)}
+                className={`flex items-center justify-between w-full py-2.5 px-3 rounded-lg mb-1 text-sm transition-colors ${
+                  openMenu === item.name
+                    ? "bg-blue-50 text-blue-600"
+                    : "text-gray-700 hover:bg-gray-100"
+                }`}
               >
-                <div className="flex items-center space-x-3">
+                <div className="flex items-center gap-3">
                   <span className="text-gray-500">{item.icon}</span>
-                  {isOpen && <span>{item.title}</span>}
+                  {isOpen && <span>{item.name}</span>}
                 </div>
-                {isOpen && item.subItems.length > 0 && (
+
+                {item.badge && isOpen && (
+                  <span className="text-xs bg-blue-600 text-white px-2 py-0.5 rounded-full">
+                    {item.badge}
+                  </span>
+                )}
+
+                {item.hasArrow && isOpen && (
                   <ChevronRight
                     className={`w-4 h-4 transition-transform ${
-                      openSubmenu === item.title ? 'transform rotate-90' : ''
+                      openMenu === item.name
+                        ? "rotate-90 text-blue-600"
+                        : "text-gray-400"
                     }`}
                   />
                 )}
-              </NavLink>
-
-              {/* Submenu */}
-              {isOpen && openSubmenu === item.title && item.subItems.length > 0 && (
-                <ul className="ml-8 mt-1 space-y-1">
-                  {item.subItems.map((subItem) => (
-                    <li key={subItem.name}>
-                      <NavLink
-                        to={subItem.path}
-                        className={({ isActive }) =>
-                          `block px-3 py-2 text-sm rounded-md transition-colors ${
-                            isActive
-                              ? 'text-blue-600 font-medium'
-                              : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
-                          }`
-                        }
-                      >
-                        {subItem.name}
-                      </NavLink>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </li>
-          ))}
-        </ul>
+              </button>
+            ))}
+          </div>
+        ))}
       </nav>
-
-      {/* Bottom Menu */}
-      <div className="p-4 border-t border-gray-200">
-        <ul className="space-y-1">
-          <li>
-            <button className="w-full flex items-center space-x-3 px-3 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
-              <Settings className="w-5 h-5 text-gray-500" />
-              {isOpen && <span>Settings</span>}
-            </button>
-          </li>
-          <li>
-            <button className="w-full flex items-center space-x-3 px-3 py-2.5 text-sm font-medium text-red-600 hover:bg-red-50 rounded-lg transition-colors">
-              <Power className="w-5 h-5" />
-              {isOpen && <span>Logout</span>}
-            </button>
-          </li>
-        </ul>
-      </div>
     </aside>
   );
 }
