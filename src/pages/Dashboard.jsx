@@ -74,20 +74,60 @@ export default function Dashboard() {
 
   return (
     <div className="flex-1 bg-gray-50 p-6 space-y-6">
-      {/* HERO */}
-      <div className="relative bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 text-white rounded-2xl p-8 flex justify-between items-center overflow-hidden">
-        <div className="max-w-lg space-y-3">
-          <h1 className="text-3xl font-bold">Explore Redesigned Able Pro</h1>
-          <p className="text-white/90 text-sm leading-relaxed">
+
+      {/* HERO SECTION */}
+      <div className="relative bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 text-white rounded-2xl p-8 flex justify-between items-center overflow-hidden mt-8">
+
+        {/* Blue gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400"></div>
+
+        {/* Decorative layered wave */}
+        <div className="absolute inset-0">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1440 320"
+            className="absolute bottom-0 left-0 w-full opacity-25"
+          >
+            <path
+              fill="#60a5fa"
+              fillOpacity="1"
+              d="M0,192L80,181.3C160,171,320,149,480,144C640,139,800,149,960,154.7C1120,160,1280,160,1360,160L1440,160L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"
+            ></path>
+          </svg>
+        </div>
+
+        {/* Text content */}
+        <div className="relative z-10 text-white max-w-lg">
+          <h1 className="text-3xl font-bold mb-3">Explore Redesigned Able Pro</h1>
+          <p className="text-white/90 leading-relaxed mb-6 text-sm">
             The Brand new User Interface with power of Bootstrap Components.
             Explore the Endless possibilities with Able Pro.
           </p>
-          <button className="bg-white text-blue-600 font-medium px-5 py-2 rounded-full text-sm shadow hover:bg-gray-50">
+          <button className="bg-white text-blue-600 font-medium px-6 py-2 rounded-full text-sm shadow-md hover:bg-gray-50 transition">
             Download
           </button>
         </div>
-        <img src="/Images/rocket.png" alt="Rocket" className="w-52 drop-shadow-lg" />
+
+        {/* Rocket image */}
+        <div className="relative z-10">
+          <img
+            src="/Images/rocket.png"
+            alt="Rocket"
+            className="w-56 drop-shadow-2xl translate-y-3 animate-float"
+          />
+        </div>
       </div>
+
+      {/* Floating rocket animation */}
+      <style>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(5px); }
+          50% { transform: translateY(-5px); }
+        }
+        .animate-float {
+          animation: float 4s ease-in-out infinite;
+        }
+      `}</style>
 
       {/* STAT CARDS */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -97,8 +137,10 @@ export default function Dashboard() {
             className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition"
           >
             <div className="flex justify-between mb-3">
-              <div className="w-10 h-10 flex items-center justify-center rounded-xl"
-                   style={{ backgroundColor: `${card.color}15` }}>
+              <div
+                className="w-10 h-10 flex items-center justify-center rounded-xl"
+                style={{ backgroundColor: `${card.color}15` }}
+              >
                 {card.icon}
               </div>
               <MoreVertical className="w-4 h-4 text-gray-400" />
@@ -107,7 +149,12 @@ export default function Dashboard() {
             <div className="h-10 mb-3">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={miniBarData}>
-                  <Bar dataKey="uv" fill={card.color} radius={[4, 4, 0, 0]} barSize={6} />
+                  <Bar
+                    dataKey="uv"
+                    fill={card.color}
+                    radius={[4, 4, 0, 0]}
+                    barSize={6}
+                  />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -121,7 +168,7 @@ export default function Dashboard() {
 
       {/* REPEAT CUSTOMER + PROJECT */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Chart */}
+        {/* Repeat Customer Chart */}
         <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm lg:col-span-2">
           <div className="flex justify-between items-center mb-6">
             <h3 className="font-semibold text-gray-800">Repeat customer rate</h3>
@@ -144,12 +191,18 @@ export default function Dashboard() {
               <XAxis dataKey="name" stroke="#9ca3af" />
               <YAxis stroke="#9ca3af" />
               <Tooltip />
-              <Line type="monotone" dataKey="uv" stroke="#3b82f6" strokeWidth={2} fill="url(#colorUv)" />
+              <Line
+                type="monotone"
+                dataKey="uv"
+                stroke="#3b82f6"
+                strokeWidth={2}
+                fill="url(#colorUv)"
+              />
             </LineChart>
           </ResponsiveContainer>
         </div>
 
-        {/* Project */}
+        {/* Project - Able Pro */}
         <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
           <div className="flex justify-between items-center mb-4">
             <h3 className="font-semibold text-gray-800">Project - Able Pro</h3>
@@ -168,7 +221,9 @@ export default function Dashboard() {
                 <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
                 Horizontal Layout
               </div>
-              <span className="bg-blue-50 text-blue-600 px-2 py-1 rounded text-xs font-medium">2</span>
+              <span className="bg-blue-50 text-blue-600 px-2 py-1 rounded text-xs font-medium">
+                2
+              </span>
             </li>
             <li className="flex items-center gap-2 text-sm">
               <span className="w-2 h-2 bg-orange-400 rounded-full"></span>
