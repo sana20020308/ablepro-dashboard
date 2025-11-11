@@ -177,32 +177,48 @@ export default function DashboardContent() {
       `}</style>
 
       {/* HERO BANNER */}
-      <div className="relative rounded-2xl overflow-hidden flex justify-between items-center p-8 ap-card-shadow bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 text-white">
-        <div className="max-w-lg">
-          <h1 className="text-3xl font-semibold">Explore Redesigned Able Pro</h1>
-          <p className="text-white/90 mt-2 text-sm">
-            The brand new user interface with the power of Bootstrap Components.
-            Explore the endless possibilities with Able Pro.
-          </p>
-          <div className="mt-4">
-            <button className="bg-white text-blue-600 font-medium px-5 py-2 rounded-full text-sm shadow-sm hover:bg-gray-50">
-              Download
-            </button>
-          </div>
-        </div>
+<div className="relative rounded-2xl overflow-hidden flex justify-between items-center p-8 ap-card-shadow bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 text-white">
+  {/* Background Texture Layer */}
+  <div
+    className="absolute opacity-50 inset-0 z-10 bg-right-bottom bg-no-repeat"
+    style={{
+      backgroundImage: "url('../images/widget/img-dropbox-bg.svg')",
+      backgroundSize: "100%",
+    }}
+  ></div>
 
-        {/* rocket image (if you have it at /Images/rocket.png) */}
-        <div className="hidden md:block -mr-6">
-          <img src="/Images/rocket.png" alt="rocket" className="w-56 animate-[float_4s_ease-in-out_infinite]" />
-        </div>
-      </div>
+  {/* Content */}
+  <div className="relative z-20 max-w-lg">
+    <h1 className="text-3xl font-semibold">Explore Redesigned Able Pro</h1>
+    <p className="text-white/90 mt-2 text-sm">
+      The brand new user interface with the power of Bootstrap Components.
+      Explore the endless possibilities with Able Pro.
+    </p>
+    <div className="mt-4">
+      <button className="bg-white text-blue-600 font-medium px-5 py-2 rounded-full text-sm shadow-sm hover:bg-gray-50">
+        Download
+      </button>
+    </div>
+  </div>
 
-      <style>{`
-        @keyframes float {
-          0%,100% { transform: translateY(6px); }
-          50% { transform: translateY(-6px); }
-        }
-      `}</style>
+  {/* Rocket Image */}
+  <div className="relative z-20 hidden md:block -mr-6">
+    <img
+      src="/Images/rocket.png"
+      alt="rocket"
+      className="w-56 animate-[float_4s_ease-in-out_infinite]"
+    />
+  </div>
+
+  {/* Floating Animation */}
+  <style>{`
+    @keyframes float {
+      0%,100% { transform: translateY(6px); }
+      50% { transform: translateY(-6px); }
+    }
+  `}</style>
+</div>
+
 
       {/* STAT CARDS */}
 <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
@@ -341,6 +357,142 @@ export default function DashboardContent() {
           </button>
         </div>
       </div>
+
+
+      {/* PROJECT OVERVIEW + ABLE PRO */}
+<div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+  {/* Project Overview */}
+  <div className="bg-white p-6 rounded-2xl border border-gray-100 ap-card-shadow lg:col-span-2">
+    <div className="flex justify-between items-center mb-4">
+      <h3 className="font-semibold text-gray-800">Project overview</h3>
+      <div className="relative">
+        <select
+          value={activeFilter}
+          onChange={(e) => setActiveFilter(e.target.value)}
+          className="bg-transparent border border-gray-200 text-gray-700 text-sm rounded-lg px-3 py-1 focus:outline-none focus:ring-1 focus:ring-blue-500"
+        >
+          <option>Today</option>
+          <option>Weekly</option>
+          <option>Monthly</option>
+        </select>
+      </div>
+    </div>
+
+    <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-6">
+      {/* Left: Total Tasks */}
+      <div>
+        <p className="text-sm text-gray-600">Total Tasks</p>
+        <h2 className="text-2xl font-semibold text-gray-900">34,686</h2>
+        <ReactApexChart
+          options={{
+            chart: {
+              type: "line",
+              sparkline: { enabled: true },
+            },
+            stroke: { curve: "smooth", width: 2, colors: ["#3b82f6"] },
+            fill: {
+              opacity: 0.3,
+              colors: ["#3b82f6"],
+            },
+            tooltip: { enabled: false },
+          }}
+          series={[{ data: [10, 15, 14, 20, 18, 25, 30] }]}
+          type="line"
+          height={50}
+        />
+      </div>
+
+      {/* Middle: Pending Tasks */}
+      <div>
+        <p className="text-sm text-gray-600">Pending Tasks</p>
+        <h2 className="text-2xl font-semibold text-gray-900">3,786</h2>
+        <ReactApexChart
+          options={{
+            chart: {
+              type: "line",
+              sparkline: { enabled: true },
+            },
+            stroke: { curve: "smooth", width: 2, colors: ["#ef4444"] },
+            fill: {
+              opacity: 0.3,
+              colors: ["#ef4444"],
+            },
+            tooltip: { enabled: false },
+          }}
+          series={[{ data: [12, 10, 9, 14, 12, 11, 10] }]}
+          type="line"
+          height={50}
+        />
+      </div>
+
+      {/* Right: Add Project Button */}
+      <div className="flex justify-end items-center">
+        <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2 rounded-full text-sm flex items-center gap-2 transition">
+          <Plus className="w-4 h-4" /> Add project
+        </button>
+      </div>
+    </div>
+  </div>
+
+  {/* Able Pro Card */}
+  <div className="bg-white p-6 rounded-2xl border border-gray-100 ap-card-shadow flex flex-col justify-between">
+    <div className="flex justify-between items-start mb-4">
+      <div>
+        <h3 className="font-semibold text-gray-800 flex items-center gap-2">
+          <span className="bg-blue-50 text-blue-600 p-2 rounded-xl">@</span> Able pro
+        </h3>
+        <p className="text-sm text-gray-500">@ableprodevelop</p>
+      </div>
+      <MoreVertical className="w-4 h-4 text-gray-400" />
+    </div>
+
+    <div className="mt-auto">
+      <div className="flex -space-x-2 mb-3">
+        <img
+          src="/Images/user1.png"
+          alt="user"
+          className="w-8 h-8 rounded-full border-2 border-white"
+        />
+        <img
+          src="/Images/user2.png"
+          alt="user"
+          className="w-8 h-8 rounded-full border-2 border-white"
+        />
+        <img
+          src="/Images/user3.png"
+          alt="user"
+          className="w-8 h-8 rounded-full border-2 border-white"
+        />
+        <img
+          src="/Images/user4.png"
+          alt="user"
+          className="w-8 h-8 rounded-full border-2 border-white"
+        />
+        <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-xs font-semibold text-gray-700 border-2 border-white">
+          +2
+        </div>
+      </div>
+
+      <div className="flex justify-between items-center">
+        <select
+          value={activeFilter}
+          onChange={(e) => setActiveFilter(e.target.value)}
+          className="bg-transparent border border-gray-200 text-gray-700 text-sm rounded-lg px-3 py-1 focus:outline-none focus:ring-1 focus:ring-blue-500"
+        >
+          <option>Today</option>
+          <option>Weekly</option>
+          <option>Monthly</option>
+        </select>
+
+        <button className="bg-blue-600 hover:bg-blue-700 text-white rounded-full p-2 transition">
+          <Plus className="w-4 h-4" />
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
       {/* TRANSACTIONS + TOTAL INCOME */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
