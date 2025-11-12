@@ -49,7 +49,16 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
     {
       title: "NAVIGATION",
       items: [
-        { name: "Dashboard", icon: <LayoutDashboard />, badge: 2 },
+        {
+  name: "Dashboard",
+  icon: <LayoutDashboard />,
+  hasArrow: true,
+  subItems: [
+    { name: "Default", path: "/dashboard" },
+    { name: "Analytics", path: "/dashboard/analytics" },
+    { name: "Finance", path: "/dashboard/finance" }, // ✅ NEW PAGE
+  ],
+},
         { name: "Layouts", icon: <Layers />, hasArrow: true },
       ],
     },
@@ -212,36 +221,52 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
               </p>
             )}
             {section.items.map((item) => (
-              <button
-                key={item.name}
-                onClick={() => toggleSubmenu(item.name)}
-                className={`flex items-center justify-between w-full py-2.5 px-3 rounded-lg mb-1 text-sm transition-colors ${
-                  openMenu === item.name
-                    ? "bg-blue-50 text-blue-600"
-                    : "text-gray-700 hover:bg-gray-100"
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <span className="text-gray-500">{item.icon}</span>
-                  {isOpen && <span>{item.name}</span>}
-                </div>
+              <div key={item.name} className="mb-1">
+                <button
+                  onClick={() => item.hasArrow && toggleSubmenu(item.name)}
+                  className={`flex items-center justify-between w-full py-2.5 px-3 rounded-lg text-sm transition-colors ${
+                    openMenu === item.name
+                      ? "bg-blue-50 text-blue-600"
+                      : "text-gray-700 hover:bg-gray-100"
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="text-gray-500">{item.icon}</span>
+                    {isOpen && <span>{item.name}</span>}
+                  </div>
 
-                {item.badge && isOpen && (
-                  <span className="text-xs bg-blue-600 text-white px-2 py-0.5 rounded-full">
-                    {item.badge}
-                  </span>
-                )}
+                  {item.badge && isOpen && (
+                    <span className="text-xs bg-blue-600 text-white px-2 py-0.5 rounded-full">
+                      {item.badge}
+                    </span>
+                  )}
 
-                {item.hasArrow && isOpen && (
-                  <ChevronRight
-                    className={`w-4 h-4 transition-transform ${
-                      openMenu === item.name
-                        ? "rotate-90 text-blue-600"
-                        : "text-gray-400"
-                    }`}
-                  />
+                  {item.hasArrow && isOpen && (
+                    <ChevronRight
+                      className={`w-4 h-4 transition-transform ${
+                        openMenu === item.name
+                          ? "rotate-90 text-blue-600"
+                          : "text-gray-400"
+                      }`}
+                    />
+                  )}
+                </button>
+
+                {/* Submenu items */}
+                {item.subItems && openMenu === item.name && isOpen && (
+                  <div className="ml-8 mt-1 space-y-1">
+                    {item.subItems.map((subItem) => (
+                      <a
+                        key={subItem.name}
+                        href={subItem.path}
+                        className="block py-2 px-3 text-sm text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                      >
+                        {subItem.name}
+                      </a>
+                    ))}
+                  </div>
                 )}
-              </button>
+              </div>
             ))}
           </div>
         ))}

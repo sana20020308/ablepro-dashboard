@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
 import Dashboard from "./pages/Dashboard";
+import Finance from "./pages/Finance";
 
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -27,6 +28,8 @@ function App() {
         <main className="flex-1 p-6 overflow-y-auto bg-[#f8f9fa]">
           <Routes>
             <Route path="/" element={<Dashboard />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/dashboard/finance" element={<Finance />} />
           </Routes>
         </main>
       </div>
