@@ -1,33 +1,39 @@
 import React from "react";
 import ReactApexChart from "react-apexcharts";
+import MyCard from "../components/MyCard";
+import TransactionCard from "../components/TransactionCard";
+import TransactionCards from "../components/TransactionCards";
 import {
   MoreVertical,
   Plus,
   ArrowUpRight,
   ArrowDownRight,
   DollarSign,
-  CreditCard,
-  UserPlus,
-  Send,
 } from "lucide-react";
+
+// This single-file React component is designed to be pasted into a Tailwind + React
+// project. It uses react-apexcharts for charts and lucide-react for icons.
+// Requirements: react, react-dom, react-apexcharts, apexcharts, lucide-react, tailwindcss
 
 export default function Finance() {
   // Cashflow chart config
   const cashflowOptions = {
     chart: { type: "bar", toolbar: { show: false } },
-    plotOptions: { bar: { borderRadius: 4, columnWidth: "55%" } },
+    plotOptions: { bar: { borderRadius: 8, columnWidth: "45%" } },
     dataLabels: { enabled: false },
-    stroke: { show: true, width: 2, colors: ["transparent"] },
+    stroke: { show: false },
     xaxis: {
-      categories: ["1", "3", "5", "8", "10", "12"],
-      labels: { style: { colors: "#94a3b8" } },
+      categories: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+      labels: { style: { colors: "#94a3b8", fontSize: "12px" } },
     },
-    colors: ["#4F46E5", "#60A5FA"],
-    legend: { show: false },
+    colors: ["#2b6cb0", "#60a5fa"],
+    grid: { show: false },
+    legend: { show: true, position: "top", horizontalAlign: "right" },
+    tooltip: { theme: "light" },
   };
   const cashflowSeries = [
-    { name: "Income", data: [44, 55, 41, 67, 22, 43] },
-    { name: "Expense", data: [13, 23, 20, 8, 13, 27] },
+    { name: "Income", data: [65, 59, 80, 81, 56, 55, 40, 68, 76, 85, 72, 90] },
+    { name: "Expends", data: [28, 48, 40, 19, 86, 27, 90, 34, 52, 30, 44, 35] },
   ];
 
   // Pie chart config
@@ -35,210 +41,157 @@ export default function Finance() {
     chart: { type: "donut" },
     labels: ["Saving", "Spend", "Income"],
     colors: ["#60A5FA", "#F87171", "#34D399"],
-    legend: { position: "bottom" },
+    legend: { show: false },
   };
   const pieSeries = [44, 33, 23];
 
   return (
-    <div className="p-6 space-y-6">
-      {/* Breadcrumb / Header */}
-      <div>
-        <h2 className="text-2xl font-semibold text-[var(--color-theme-headings)]">
-          Finance
-        </h2>
-        <p className="text-sm text-[var(--color-gray-500)]">
-          Dashboard / Finance
-        </p>
+    <div className="p-6 max-w-full">
+      {/* Header / Breadcrumb */}
+      <div className="mb-6">
+        <nav className="text-sm text-[var(--color-gray-500)] mb-2">Home <span className="opacity-50">/</span> Dashboard <span className="opacity-50">/</span> Finance</nav>
+        <h1 className="text-3xl font-semibold text-[var(--color-theme-headings)]">Finance</h1>
       </div>
 
-      {/* Row 1: My Card + Transaction Summary */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        {/* My Card */}
-        <div className="bg-gradient-to-br from-gray-900 to-gray-800 text-white rounded-2xl p-5 flex flex-col justify-between shadow-sm">
-          <div>
-            <p className="text-sm opacity-70 mb-1">CARD NAME</p>
-            <h4 className="text-lg font-medium">Jonh Smith</h4>
-          </div>
-          <div className="flex justify-between items-end mt-6">
-            <div>
-              <p className="text-xs opacity-70 mb-1">EXP</p>
-              <p className="font-semibold">07/30</p>
-            </div>
-            <div>
-              <p className="text-xs opacity-70 mb-1">CVV</p>
-              <p className="font-semibold">455</p>
-            </div>
-          </div>
-          <h2 className="text-3xl font-bold mt-6">$1.480.000</h2>
-          <p className="text-xs opacity-70">Total Balance</p>
-        </div>
+      {/* Top row: Card + 3 small stat cards */}
+      <div className="grid grid-cols-12 gap-6 mb-6">
+        {/* Left: My Card (col-span 5) */}
+<div className="col-span-12 lg:col-span-5">
+  <MyCard />
+</div>
 
-        {/* Transaction Summary Cards */}
-        {[1, 2, 3].map((i) => (
-          <div
-            key={i}
-            className="bg-[var(--color-theme-cardbg)] border border-[var(--color-theme-border)] rounded-2xl p-5 shadow-sm"
-          >
-            <div className="flex justify-between mb-3">
-              <p className="text-sm text-[var(--color-gray-500)]">
-                Transactions
-              </p>
+
+        {/* Right: three small stat cards (col-span 7) */}
+        <div className="col-span-12 lg:col-span-7">
+  <TransactionCards />
+</div>
+
+
+
+      </div>
+
+      {/* Middle row: left transactions list + wide cashflow chart */}
+      <div className="grid grid-cols-12 gap-6 mb-6">
+        {/* Transactions list (col 3) */}
+        <div className="col-span-12 lg:col-span-3">
+          <div className="bg-[var(--color-theme-cardbg)] border border-[var(--color-theme-border)] rounded-2xl p-5 shadow-sm h-full">
+            <div className="flex justify-between items-center mb-4">
+              <h5 className="font-semibold">Transactions</h5>
               <MoreVertical className="w-4 h-4 text-[var(--color-gray-400)]" />
             </div>
-            <h4 className="text-lg font-semibold">$650k</h4>
-            <p className="text-xs text-[var(--color-gray-500)]">
-              Compare to last week
-            </p>
-          </div>
-        ))}
-      </div>
-
-      {/* Row 2: Cashflow + Transactions */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Transactions List */}
-        <div className="bg-[var(--color-theme-cardbg)] border border-[var(--color-theme-border)] rounded-2xl p-5 shadow-sm">
-          <div className="flex justify-between mb-3">
-            <h5 className="font-semibold">Transactions</h5>
-            <MoreVertical className="w-4 h-4 text-[var(--color-gray-400)]" />
-          </div>
-
-          <ul className="space-y-4">
-            {[
-              { name: "Apple Inc.", amount: -210000, type: "down" },
-              { name: "Spotify Music", amount: -10000, type: "up" },
-              { name: "Medium", amount: -26, type: "down" },
-              { name: "Uber", amount: 210000, type: "up" },
-              { name: "Ola Cabs", amount: 210000, type: "up" },
-            ].map((tx, i) => (
-              <li key={i} className="flex justify-between items-center">
-                <div>
-                  <h6 className="font-medium text-[var(--color-theme-headings)]">
-                    {tx.name}
-                  </h6>
-                  <p className="text-xs text-[var(--color-gray-500)]">
-                    #{1000 + i}-TX
-                  </p>
-                </div>
-                <div
-                  className={`flex items-center gap-1 font-semibold ${
-                    tx.type === "up"
-                      ? "text-green-500"
-                      : "text-red-500"
-                  }`}
-                >
-                  {tx.type === "up" ? (
-                    <ArrowUpRight className="w-4 h-4" />
-                  ) : (
-                    <ArrowDownRight className="w-4 h-4" />
-                  )}
-                  <span>${Math.abs(tx.amount).toLocaleString()}</span>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Cashflow Chart */}
-        <div className="bg-[var(--color-theme-cardbg)] border border-[var(--color-theme-border)] rounded-2xl p-5 shadow-sm col-span-2">
-          <div className="flex justify-between items-center mb-3">
-            <h5 className="font-semibold">Cashflow</h5>
-            <select className="border rounded-md text-sm px-2 py-1 text-[var(--color-gray-600)]">
-              <option>Monthly</option>
-              <option>Weekly</option>
-              <option>Yearly</option>
-            </select>
-          </div>
-          <ReactApexChart
-            options={cashflowOptions}
-            series={cashflowSeries}
-            type="bar"
-            height={220}
-          />
-        </div>
-      </div>
-
-      {/* Row 3: Where your money go, Accounts, Quick Transfer, Category */}
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-        {/* Where your money go */}
-        <div className="bg-[var(--color-theme-cardbg)] border border-[var(--color-theme-border)] rounded-2xl p-5 shadow-sm col-span-2">
-          <div className="flex justify-between items-center mb-4">
-            <h5 className="font-semibold">Where your money go?</h5>
-            <button className="flex items-center gap-1 text-sm text-blue-600">
-              <Plus className="w-4 h-4" /> Add New
-            </button>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {["Food & Drink", "Travel", "Shopping", "Healthcare"].map(
-              (c, i) => (
-                <div
-                  key={i}
-                  className="bg-gray-50 p-3 rounded-lg text-center hover:shadow transition"
-                >
-                  <p className="font-medium text-sm mb-1">{c}</p>
-                  <p className="text-xs text-[var(--color-gray-500)]">
-                    {(40 - i * 5) + "%"} | ${1000 - i * 200}
-                  </p>
-                </div>
-              )
-            )}
+            <ul className="space-y-4">
+              {[{name: 'Apple Inc.', amt: -210000}, {name: 'Spotify Music', amt: -10000}, {name: 'Medium', amt: -26}, {name: 'Uber', amt: 210000}, {name: 'Ola Cabs', amt: 210000}].map((tx, i) => (
+                <li key={i} className="flex items-center justify-between">
+                  <div>
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-sm">{tx.name.split(' ').map(x => x[0]).slice(0,2).join('')}</div>
+                      <div>
+                        <div className="font-medium text-[var(--color-theme-headings)]">{tx.name}</div>
+                        <div className="text-xs text-[var(--color-gray-500)]">#{1000+i}-PRO-TX</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className={`font-semibold flex items-center gap-1 ${tx.amt > 0 ? 'text-green-500' : 'text-red-500'}`}>
+                    {tx.amt > 0 ? <ArrowUpRight className="w-4 h-4" /> : <ArrowDownRight className="w-4 h-4" />}
+                    <span>${Math.abs(tx.amt).toLocaleString()}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
-        {/* Accounts */}
-        <div className="bg-[var(--color-theme-cardbg)] border border-[var(--color-theme-border)] rounded-2xl p-5 shadow-sm">
-          <h5 className="font-semibold mb-4">Accounts</h5>
-          {[1, 2].map((i) => (
-            <div
-              key={i}
-              className="border rounded-lg p-3 mb-3 flex justify-between items-center"
-            >
-              <div>
-                <p className="text-sm text-[var(--color-gray-500)]">Active</p>
-                <h6 className="font-semibold">12,920,000</h6>
-              </div>
-              <p className="text-xs text-[var(--color-gray-400)]">US Dollar</p>
+        {/* Cashflow (col 9) */}
+        <div className="col-span-12 lg:col-span-9">
+          <div className="bg-[var(--color-theme-cardbg)] border border-[var(--color-theme-border)] rounded-2xl p-5 shadow-sm">
+            <div className="flex justify-between items-center mb-4">
+              <h5 className="font-semibold">Cashflow</h5>
+              <select className="border rounded-md text-sm px-2 py-1 text-[var(--color-gray-600)]">
+                <option>Monthly</option>
+                <option>Weekly</option>
+                <option>Yearly</option>
+              </select>
             </div>
-          ))}
-          <button className="w-full border border-dashed text-gray-400 py-2 rounded-lg text-sm">
-            + Add Account
-          </button>
-        </div>
-
-        {/* Quick Transfer */}
-        <div className="bg-[var(--color-theme-cardbg)] border border-[var(--color-theme-border)] rounded-2xl p-5 shadow-sm">
-          <h5 className="font-semibold mb-4">Quick Transfer</h5>
-          <ul className="space-y-3">
-            <li className="flex justify-between">
-              <span>Starbucks Cafe</span> <span className="text-red-500">-$26</span>
-            </li>
-            <li className="flex justify-between">
-              <span>Apple Inc.</span> <span className="text-green-500">+$750</span>
-            </li>
-            <li className="flex justify-between">
-              <span>Ola Cabs</span> <span className="text-red-500">-$26</span>
-            </li>
-          </ul>
-        </div>
-
-        {/* Category */}
-        <div className="bg-[var(--color-theme-cardbg)] border border-[var(--color-theme-border)] rounded-2xl p-5 shadow-sm">
-          <h5 className="font-semibold mb-3">Category</h5>
-          <ReactApexChart
-            options={pieOptions}
-            series={pieSeries}
-            type="donut"
-            height={200}
-          />
+            <div className="mb-3 flex items-center gap-3">
+              <div className="text-sm text-[var(--color-gray-500)]">5.44%</div>
+              <div className="text-xs bg-green-100 text-green-600 px-2 py-0.5 rounded">+5.44%</div>
+            </div>
+            <ReactApexChart options={cashflowOptions} series={cashflowSeries} type="bar" height={240} />
+          </div>
         </div>
       </div>
 
-      {/* Row 4: Transaction History Table */}
+      {/* Lower row: Where money go (wide), Accounts, Quick Transfer, Category */}
+      <div className="grid grid-cols-12 gap-6 mb-6">
+        <div className="col-span-12 lg:col-span-7">
+          <div className="bg-[var(--color-theme-cardbg)] border border-[var(--color-theme-border)] rounded-2xl p-5 shadow-sm">
+            <div className="flex justify-between items-center mb-4">
+              <h5 className="font-semibold">Where your money go ?</h5>
+              <button className="flex items-center gap-2 text-sm text-blue-600"><Plus className="w-4 h-4"/> Add New</button>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              {[
+                {title: 'Food & Drink', pct: '65%', val: '$1000'},
+                {title: 'Travel', pct: '30%', val: '$400'},
+                {title: 'Shopping', pct: '52%', val: '$900'},
+                {title: 'Healthcare', pct: '26%', val: '$250'},
+              ].map((c, i) => (
+                <div key={i} className="bg-white p-3 rounded-lg shadow-sm border">
+                  <div className="flex justify-between items-center mb-2">
+                    <div className="text-sm font-medium">{c.title}</div>
+                    <MoreVertical className="w-4 h-4 text-[var(--color-gray-400)]" />
+                  </div>
+                  <div className="bg-gray-900 text-white rounded-lg p-3 text-center">
+                    <div className="text-xs opacity-70">{c.pct}</div>
+                    <div className="font-semibold text-sm">{c.val}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="col-span-12 lg:col-span-5 grid grid-cols-2 gap-4">
+          {/* Accounts */}
+          <div className="col-span-1 bg-[var(--color-theme-cardbg)] border border-[var(--color-theme-border)] rounded-2xl p-5 shadow-sm">
+            <h5 className="font-semibold mb-4">Accounts</h5>
+            {[1,2].map((i)=> (
+              <div key={i} className="border rounded-lg p-3 mb-3 flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-[var(--color-gray-500)]">Active</p>
+                  <h6 className="font-semibold">12,920,000</h6>
+                </div>
+                <p className="text-xs text-[var(--color-gray-400)]">US Dollar</p>
+              </div>
+            ))}
+            <button className="w-full border border-dashed text-gray-400 py-2 rounded-lg text-sm">+ Add Account</button>
+          </div>
+
+          {/* Quick Transfer */}
+          <div className="col-span-1 bg-[var(--color-theme-cardbg)] border border-[var(--color-theme-border)] rounded-2xl p-5 shadow-sm">
+            <h5 className="font-semibold mb-4">Quick Transfer</h5>
+            <ul className="space-y-3">
+              <li className="flex justify-between"><span>Starbucks Cafe</span><span className="text-red-500">-$26</span></li>
+              <li className="flex justify-between"><span>Apple Inc.</span><span className="text-green-500">+$750</span></li>
+              <li className="flex justify-between"><span>Ola Cabs</span><span className="text-red-500">-$26</span></li>
+            </ul>
+          </div>
+
+          {/* Category (span full width) */}
+          <div className="col-span-2 bg-[var(--color-theme-cardbg)] border border-[var(--color-theme-border)] rounded-2xl p-5 shadow-sm">
+            <h5 className="font-semibold mb-3">Category</h5>
+            <div className="flex justify-center">
+              <ReactApexChart options={pieOptions} series={pieSeries} type="donut" height={180} />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Transaction history table */}
       <div className="bg-[var(--color-theme-cardbg)] border border-[var(--color-theme-border)] rounded-2xl p-6 shadow-sm">
         <div className="flex justify-between items-center mb-4">
           <h5 className="font-semibold">Transaction History</h5>
-          <a href="#" className="text-blue-600 text-sm font-medium">
-            View All
-          </a>
+          <a className="text-blue-600 text-sm font-medium" href="#">View All</a>
         </div>
 
         <div className="overflow-x-auto">
@@ -253,27 +206,14 @@ export default function Finance() {
               </tr>
             </thead>
             <tbody>
-              {[
-                { name: "Airi Satou", cat: "Salary Payment", amt: "$950.54", status: "Completed" },
-                { name: "Ashton Cox", cat: "Project Payment", amt: "$520.30", status: "Completed" },
-                { name: "Bradley Greer", cat: "YouTube Subscribe", amt: "$100.00", status: "Pending" },
-                { name: "Brielle Williamson", cat: "Salary Payment", amt: "$760.25", status: "In Progress" },
-              ].map((t, i) => (
+              {[{ name: "Airi Satou", cat: "Salary Payment", amt: "$950.54", status: "Completed" }, { name: "Ashton Cox", cat: "Project Payment", amt: "$520.30", status: "Completed" }, { name: "Bradley Greer", cat: "You Tube Subscribe", amt: "$100.00", status: "Pending" }, { name: "Brielle Williamson", cat: "Salary Payment", amt: "$760.25", status: "In Progress" }].map((t, i) => (
                 <tr key={i} className="border-b last:border-none">
                   <td className="py-3 px-4 font-medium">{t.name}</td>
                   <td className="py-3 px-4 text-[var(--color-gray-600)]">{t.cat}</td>
                   <td className="py-3 px-4 text-[var(--color-gray-600)]">2023/02/07</td>
                   <td className="py-3 px-4 font-semibold">{t.amt}</td>
                   <td className="py-3 px-4">
-                    <span
-                      className={`px-3 py-1 rounded-full text-xs font-medium ${
-                        t.status === "Completed"
-                          ? "bg-green-100 text-green-600"
-                          : t.status === "Pending"
-                          ? "bg-yellow-100 text-yellow-600"
-                          : "bg-blue-100 text-blue-600"
-                      }`}
-                    >
+                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${t.status === "Completed" ? "bg-green-100 text-green-600" : t.status === "Pending" ? "bg-yellow-100 text-yellow-600" : "bg-blue-100 text-blue-600"}`}>
                       {t.status}
                     </span>
                   </td>
@@ -283,6 +223,17 @@ export default function Finance() {
           </table>
         </div>
       </div>
+
+      <style jsx>{`
+        /* If you want to tweak theme variables locally in this component, set them here */
+        :root{
+          --color-theme-cardbg: #ffffff;
+          --color-theme-border: #e6eef5;
+          --color-theme-headings: #0f172a;
+          --color-gray-500: #94a3b8;
+          --color-gray-600: #64748b;
+        }
+      `}</style>
     </div>
   );
 }
