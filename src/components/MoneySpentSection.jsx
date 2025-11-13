@@ -16,9 +16,9 @@ const categories = [
 
 export default function MoneySpentSection() {
   return (
-    <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-6">
+    <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-4">
       {/* Header */}
-      <div className="flex items-center justify-between mb-5">
+      <div className="flex items-center justify-between mb-4">
         <h5 className="text-[17px] font-semibold text-gray-800">
           Where your money go ?
         </h5>
@@ -28,16 +28,13 @@ export default function MoneySpentSection() {
       </div>
 
       {/* Grid */}
-      <div className="grid grid-cols-12 gap-5">
+      <div className="grid grid-cols-12 gap-4">
         {categories.map((item, index) => (
-          <div
-            key={index}
-            className="col-span-12 sm:col-span-6 xl:col-span-3"
-          >
+          <div key={index} className="col-span-12 sm:col-span-6 xl:col-span-3">
             <div className="border border-gray-200 rounded-2xl shadow-sm bg-white hover:shadow-md transition-all duration-200">
-              <div className="p-5">
+              <div className="p-4">
                 {/* Top: image and menu */}
-                <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center justify-between mb-2.5">
                   <img
                     src={item.img}
                     alt={item.title}
@@ -49,12 +46,12 @@ export default function MoneySpentSection() {
                 </div>
 
                 {/* Title */}
-                <h6 className="text-[15px] font-medium text-gray-800 mb-4">
+                <h6 className="text-[15px] font-medium text-gray-800 mb-3">
                   {item.title}
                 </h6>
 
                 {/* Dark progress box */}
-                <div className="bg-[#0f172a] text-white rounded-2xl px-4 py-3.5">
+                <div className="bg-[#0f172a] text-white rounded-2xl px-3 py-2.5">
                   {/* Progress bar */}
                   <div className="w-full bg-white bg-opacity-20 rounded-lg h-1.5 mb-2">
                     <div

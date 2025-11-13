@@ -7,9 +7,7 @@ import AccountsSection from "../components/AccountsSection";
 import TransactionsSection from "../components/TransactionsSection";
 import { MoreVertical } from "lucide-react";
 
-// Final Complete Finance Page Layout
 export default function Finance() {
-  // Pie Chart Data (Category)
   const pieOptions = {
     chart: { type: "donut" },
     labels: ["Saving", "Spend", "Income"],
@@ -24,7 +22,7 @@ export default function Finance() {
   const pieSeries = [44, 33, 23];
 
   return (
-    <div className="p-6 max-w-[1600px] mx-auto space-y-8 bg-[#f8fafc]">
+    <div className="p-6 max-w-[1600px] mx-auto space-y-6 bg-[#f8fafc]">
       {/* Breadcrumb + Title */}
       <div>
         <p className="text-sm text-gray-400">
@@ -33,55 +31,53 @@ export default function Finance() {
         <h1 className="text-3xl font-semibold text-gray-900 mt-1">Finance</h1>
       </div>
 
-      {/* Row 1: My Card + Transaction cards */}
-      <div className="grid grid-cols-12 gap-6">
-        <div className="col-span-12 xl:col-span-4">
+      {/* 🔥 ROW 1 → My Card (Left) + Transactions Section (Below My Card) */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        {/* Left Side */}
+        <div className="lg:col-span-4 space-y-6">
           <MyCard />
+          <TransactionsSection />
         </div>
-        <div className="col-span-12 xl:col-span-8">
+
+        {/* Right Side */}
+        <div className="lg:col-span-8 space-y-6">
           <TransactionCards />
-        </div>
-      </div>
-      
 
-      {/* Row 2: Transactions + Cashflow */}
-      <div className="grid grid-cols-12 gap-6">
-<div className="col-span-12 xl:col-span-3">
-  <TransactionsSection />
-</div>
-
-
-        {/* Right: Cashflow */}
-        <div className="col-span-12 xl:col-span-9">
-          <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-6 h-full">
+          {/* Cashflow Chart */}
+          <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-6">
             <div className="flex justify-between items-center mb-4">
               <div>
                 <h5 className="font-semibold text-gray-800 mb-1">Cashflow</h5>
                 <p className="text-sm text-gray-500 flex items-center gap-2">
-                  5.44% <span className="bg-green-100 text-green-600 text-xs font-medium px-2 py-0.5 rounded">+5.44%</span>
+                  5.44%
+                  <span className="bg-green-100 text-green-600 text-xs font-medium px-2 py-0.5 rounded">
+                    +5.44%
+                  </span>
                 </p>
               </div>
-
               <select className="border border-gray-300 rounded-md text-sm px-2 py-1 text-gray-600 focus:ring-1 focus:ring-blue-500">
                 <option>Today</option>
                 <option>Weekly</option>
-                <option selected>Monthly</option>
+                <option>Monthly</option>
               </select>
             </div>
 
-            {/* Chart */}
             <ReactApexChart
               options={{
-                chart: {
-                  type: "bar",
-                  height: 230,
-                  toolbar: { show: false },
-                },
+                chart: { type: "bar", height: 230, toolbar: { show: false } },
                 plotOptions: {
-                  bar: { horizontal: false, columnWidth: "40%", borderRadius: 4 },
+                  bar: {
+                    horizontal: false,
+                    columnWidth: "40%",
+                    borderRadius: 4,
+                  },
                 },
                 dataLabels: { enabled: false },
-                stroke: { show: true, width: 3, colors: ["transparent"] },
+                stroke: {
+                  show: true,
+                  width: 3,
+                  colors: ["transparent"],
+                },
                 colors: ["#4680ff", "rgba(70,128,255,0.4)"],
                 xaxis: {
                   categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
@@ -110,26 +106,23 @@ export default function Finance() {
               height={230}
             />
           </div>
+
+          {/* Where Your Money Go */}
+          <MoneySpentSection />
         </div>
       </div>
 
-{/* Row 3: Money Spent + Accounts + Quick Transfer + Category */}
-<div className="grid grid-cols-12 gap-6">
+     {/* ROW: Accounts + Quick Transfer + Category (3 Equal Cards) */}
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
 
-  {/* Left: Money Spent (8 cols) */}
-  <div className="col-span-12 xl:col-span-8">
-    <MoneySpentSection />
-  </div>
-
-  {/* Right: Accounts (top-right) */}
-  <div className="col-span-12 xl:col-span-4">
+  {/* Accounts */}
+  <div className="lg:col-span-4">
     <AccountsSection />
   </div>
 
-  {/* Right: Quick Transfer (middle-right) */}
-  <div className="col-span-12 xl:col-span-4">
-    <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-6">
-
+  {/* Quick Transfer */}
+  <div className="lg:col-span-4">
+    <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-6 h-full">
       <div className="flex justify-between items-center mb-4">
         <h5 className="text-base font-semibold text-gray-800">Quick Transfer</h5>
         <select className="text-sm border border-gray-200 rounded-md px-2 py-1 text-gray-600">
@@ -164,13 +157,12 @@ export default function Finance() {
           <span className="text-red-500 font-semibold">-$26</span>
         </li>
       </ul>
-
     </div>
   </div>
 
-  {/* Right: Category (bottom-right) */}
-  <div className="col-span-12 xl:col-span-4">
-    <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-6">
+  {/* Category */}
+  <div className="lg:col-span-4">
+    <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-6 h-full">
       <div className="flex justify-between items-center mb-3">
         <h5 className="text-base font-semibold text-gray-800">Category</h5>
         <select className="text-sm border border-gray-200 rounded-md px-2 py-1 text-gray-600">
@@ -179,6 +171,7 @@ export default function Finance() {
           <option>Monthly</option>
         </select>
       </div>
+
       <div className="flex justify-center">
         <ReactApexChart
           options={pieOptions}
@@ -193,11 +186,14 @@ export default function Finance() {
 </div>
 
 
-      {/* Row 4: Transaction History Table */}
+      {/* Transaction History */}
       <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-6">
         <div className="flex justify-between items-center mb-4">
           <h5 className="font-semibold text-gray-800">Transaction History</h5>
-          <a className="text-blue-600 text-sm font-medium hover:underline" href="#">
+          <a
+            className="text-blue-600 text-sm font-medium hover:underline"
+            href="#"
+          >
             View All
           </a>
         </div>
@@ -213,19 +209,54 @@ export default function Finance() {
                 <th className="py-3 px-4 text-left">STATUS</th>
               </tr>
             </thead>
+
             <tbody>
               {[
-                { name: "Airi Satou", cat: "Salary Payment", date: "2023/02/07", amt: "$950.54", status: "Completed" },
-                { name: "Ashton Cox", cat: "Project Payment", date: "2023/02/01", amt: "$520.30", status: "Completed" },
-                { name: "Bradley Greer", cat: "You Tube Subscribe", date: "2023/01/22", amt: "$100.00", status: "Pending" },
-                { name: "Brielle Williamson", cat: "Salary Payment", date: "2023/02/07", amt: "$760.25", status: "In Progress" },
-                { name: "Airi Satou", cat: "Spotify Subscribe", date: "2023/02/07", amt: "$60.05", status: "Cancelled" },
+                {
+                  name: "Airi Satou",
+                  cat: "Salary Payment",
+                  date: "2023/02/07",
+                  amt: "$950.54",
+                  status: "Completed",
+                },
+                {
+                  name: "Ashton Cox",
+                  cat: "Project Payment",
+                  date: "2023/02/01",
+                  amt: "$520.30",
+                  status: "Completed",
+                },
+                {
+                  name: "Bradley Greer",
+                  cat: "You Tube Subscribe",
+                  date: "2023/01/22",
+                  amt: "$100.00",
+                  status: "Pending",
+                },
+                {
+                  name: "Brielle Williamson",
+                  cat: "Salary Payment",
+                  date: "2023/02/07",
+                  amt: "$760.25",
+                  status: "In Progress",
+                },
+                {
+                  name: "Airi Satou",
+                  cat: "Spotify Subscribe",
+                  date: "2023/02/07",
+                  amt: "$60.05",
+                  status: "Cancelled",
+                },
               ].map((t, i) => (
                 <tr key={i} className="border-b last:border-none">
-                  <td className="py-3 px-4 font-medium text-gray-800">{t.name}</td>
+                  <td className="py-3 px-4 font-medium text-gray-800">
+                    {t.name}
+                  </td>
                   <td className="py-3 px-4 text-gray-500">{t.cat}</td>
                   <td className="py-3 px-4 text-gray-500">{t.date}</td>
-                  <td className="py-3 px-4 font-semibold text-gray-800">{t.amt}</td>
+                  <td className="py-3 px-4 font-semibold text-gray-800">
+                    {t.amt}
+                  </td>
                   <td className="py-3 px-4">
                     <span
                       className={`px-3 py-1 rounded-full text-xs font-medium ${
