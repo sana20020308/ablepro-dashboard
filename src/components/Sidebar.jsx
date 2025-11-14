@@ -9,48 +9,76 @@ import {
   Users,
   HelpCircle,
   FileText,
-  Cube,
-  Flag,
+  Grid,
+  Type,
+  PlusSquare,
+  Upload,
+  FileCheck,
   Wand2,
-  ChevronLeft,
-  ChevronRight,
-  MoreHorizontal,
+  Table,
+  List,
+  Map,
+  CalendarDays,
+  MessageSquare,
+  ShoppingBag,
+  Folder,
+  Mail,
   User,
-  Lock,
+  Shield,
+  Flag,
+  DollarSign,
+  Plane,
+  MoreHorizontal,
+  ChevronRight,
+  ChevronLeft,
   Power,
-  Settings
+  Settings,
+  Lock,
+  Box as Cube,
 } from "lucide-react";
 
 import { Link } from "react-router-dom";
 
 export default function Sidebar({ isOpen, toggleSidebar }) {
+  const [openMenu, setOpenMenu] = useState(null);
   const [profileMenu, setProfileMenu] = useState(false);
 
-  const menu = [
+  const toggleSubmenu = (title) => {
+    setOpenMenu(openMenu === title ? null : title);
+  };
+
+  const sections = [
     {
       title: "NAVIGATION",
-      links: [
-        { name: "Dashboard", icon: <LayoutDashboard />, path: "dashboard" },
-        { name: "Analytics", icon: <Layers />, path: "dashboard/analytics" },
-        { name: "Finance", icon: <BarChart2 />, path: "dashboard/finance" },
-      ]
+      items: [
+        {
+          name: "Dashboard",
+          icon: <LayoutDashboard />,
+          path: "dashboard",
+        },
+        {
+          name: "Finance",
+          icon: <BarChart2 />,
+          path: "dashboard/finance",
+        },
+      ],
     },
     {
       title: "UI COMPONENTS",
-      links: [
-        { name: "Components", icon: <Cube />, path: "components" }, // ⭐ FIXED
-        { name: "Animation", icon: <Flag />, path: "animations" },
-        { name: "Icons", icon: <Wand2 />, path: "icons" }
-      ]
-    }
+      items: [
+        {
+          name: "Components",
+          icon: <Cube />,
+          path: "components",   // ✔ HashRouter compatible
+        }
+      ],
+    },
   ];
 
   return (
     <>
-
-      {/* BG overlay for mobile */}
       {isOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/40 lg:hidden z-30"
           onClick={toggleSidebar}
         />
@@ -58,68 +86,39 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
 
       <aside
         className={`
-          fixed top-0 left-0 z-40 h-screen bg-[#f8f9fa] border-r shadow-sm
-          flex flex-col transition-all duration-300
-          ${isOpen ? "translate-x-0" : "-translate-x-full"}
-          w-64 lg:translate-x-0 ${isOpen ? "lg:w-64" : "lg:w-20"}
+          fixed top-0 left-0 z-40 h-screen flex flex-col 
+          bg-[#f8f9fa] border-r border-gray-200
+          transition-all duration-300
+          ${isOpen ? "translate-x-0" : "-translate-x-full"} 
+          w-64 lg:translate-x-0 
+          ${isOpen ? "lg:w-64" : "lg:w-20"}
         `}
       >
-
-        {/* HEADER */}
-        <div className="flex items-center justify-between px-4 py-3 border-b">
+        {/* Header */}
+        <div className="flex items-center justify-between px-4 py-3 border-b bg-[#f8f9fa]">
           {isOpen ? (
-            <span className="text-xl font-bold text-blue-600">Able</span>
+            <span className="text-blue-600 font-bold text-xl">Able</span>
           ) : (
-            <span className="text-2xl font-bold text-blue-600">A</span>
+            <span className="text-blue-600 font-bold text-2xl">A</span>
           )}
 
-          <button
-            onClick={toggleSidebar}
-            className="p-1 rounded hover:bg-gray-200"
-          >
+          <button onClick={toggleSidebar} className="p-1 text-gray-500 hover:bg-gray-200 rounded">
             {isOpen ? <ChevronLeft /> : <ChevronRight />}
           </button>
         </div>
 
-        {/* PROFILE */}
-        <div className="p-4">
-          <div className="bg-white p-3 rounded-xl shadow-sm flex items-center gap-3 relative">
-            <img
-              src="/Images/Avatar/avatar-2.jpg"
-              className="w-12 h-12 rounded-full object-cover"
-            />
+        {/* Menu */}
+        <nav className="flex-1 overflow-y-auto px-3 pb-5">
+          {sections.map((section) => (
+            <div key={section.title} className="mt-4">
 
-            {isOpen && (
-              <div className="flex-1">
-                <h4 className="font-semibold text-sm">John Smith</h4>
-                <p className="text-xs text-gray-500">Administrator</p>
-              </div>
-            )}
+              {isOpen && <p className="text-[11px] font-bold text-gray-400 mb-2">{section.title}</p>}
 
-            <button onClick={() => setProfileMenu(!profileMenu)}>
-              <MoreHorizontal />
-            </button>
-          </div>
-        </div>
-
-        {/* MENU */}
-        <nav className="flex-1 px-3 overflow-y-auto">
-
-          {menu.map((section) => (
-            <div key={section.title} className="mt-3">
-              
-              {isOpen && (
-                <p className="text-[11px] text-gray-400 font-bold mb-2">
-                  {section.title}
-                </p>
-              )}
-
-              {section.links.map((item) => (
+              {section.items.map((item) => (
                 <Link
                   key={item.name}
-                  to={item.path}
-                  className="flex items-center gap-3 py-2.5 px-3 rounded-lg
-                    text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition"
+                  to={item.path}                   // ✔ Finally working
+                  className="flex items-center gap-3 py-2.5 px-3 text-gray-700 hover:bg-gray-100 rounded-lg"
                 >
                   <span className="text-gray-500">{item.icon}</span>
                   {isOpen && item.name}
@@ -128,11 +127,8 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
 
             </div>
           ))}
-
         </nav>
-
       </aside>
-
     </>
   );
 }
