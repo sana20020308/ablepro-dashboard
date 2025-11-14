@@ -1,7 +1,6 @@
 import React from "react";
 import { Plus } from "lucide-react";
 
-// Images from your public folder
 const card1 = "/Images/Widgets/img-card-1.png";
 const card2 = "/Images/Widgets/img-card-2.png";
 
@@ -12,7 +11,7 @@ const accounts = [
 
 export default function AccountsSection() {
   return (
-    <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-6 w-full max-w-sm">
+    <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-4 sm:p-6 w-full">
       {/* Header */}
       <h5 className="text-lg font-semibold text-gray-900 mb-4">Accounts</h5>
 
@@ -21,35 +20,38 @@ export default function AccountsSection() {
         {accounts.map((acc, index) => (
           <div
             key={index}
-            className="border border-gray-200 rounded-2xl p-3 flex items-center justify-between h-20"
+            className="border border-gray-200 rounded-2xl p-3 flex items-center justify-between h-auto sm:h-20 gap-3"
           >
             {/* Card Image and Status */}
-            <div className="flex items-center">
-              <div className="w-16 h-10 flex-shrink-0">
+            <div className="flex items-center gap-3">
+              <div className="w-14 h-9 sm:w-16 sm:h-10 flex-shrink-0">
                 <img
                   src={acc.img}
                   alt="card"
                   className="h-full w-auto object-contain"
                 />
               </div>
-              <div className="flex items-center gap-1.5 text-green-500 text-xs font-medium ml-3">
+
+              <div className="flex items-center gap-1.5 text-green-500 text-xs font-medium">
                 <span className="w-2 h-2 bg-green-500 rounded-full"></span>
                 <span>{acc.status}</span>
               </div>
             </div>
 
-            {/* Amount */}
+            {/* Amount Section */}
             <div className="text-right">
-              <h6 className="text-gray-900 font-semibold text-sm">
+              <h6 className="text-gray-900 font-semibold text-sm sm:text-base">
                 {acc.amount}
               </h6>
-              <p className="text-gray-500 text-xs">{acc.currency}</p>
+              <p className="text-gray-500 text-xs sm:text-sm whitespace-nowrap">
+                {acc.currency}
+              </p>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Add Account Button */}
+      {/* Add Account */}
       <div className="border border-dashed border-gray-300 rounded-2xl p-4 cursor-pointer hover:bg-gray-50 transition-colors">
         <label htmlFor="formFile" className="block w-full">
           <input type="file" id="formFile" className="hidden" />

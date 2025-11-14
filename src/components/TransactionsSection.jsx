@@ -56,7 +56,7 @@ export default function TransactionsSection() {
   ];
 
   return (
-    <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-5 w-96">
+    <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-4 sm:p-6 w-full max-w-sm">
 
       {/* Header */}
       <div className="flex justify-between items-center mb-4">
@@ -67,11 +67,11 @@ export default function TransactionsSection() {
       </div>
 
       {/* Transactions List */}
-      <div className="space-y-4">
+      <div className="space-y-4 sm:space-y-5">
         {transactions.map((tx, index) => (
           <div
             key={index}
-            className="flex items-center justify-between py-1.5 border-b last:border-b-0 border-gray-100"
+            className="flex items-center justify-between gap-3 py-2.5 border-b last:border-b-0 border-gray-100"
           >
             {/* Left side */}
             <div className="flex items-center gap-3">
@@ -83,8 +83,8 @@ export default function TransactionsSection() {
               </div>
 
               {/* Info */}
-              <div>
-                <p className="text-sm font-medium text-gray-800 leading-none mb-1">
+              <div className="min-w-0">
+                <p className="text-sm font-medium text-gray-800 leading-none truncate">
                   {tx.name}
                 </p>
                 <p className="text-xs text-gray-400 leading-none">
@@ -98,6 +98,7 @@ export default function TransactionsSection() {
               <p className="text-sm font-semibold text-gray-900 leading-none mb-1">
                 {tx.amount}
               </p>
+
               <div className="flex items-center justify-end gap-1 text-xs">
                 {tx.changeIcon}
                 <span className={`${tx.changeColor} font-medium`}>
@@ -108,6 +109,7 @@ export default function TransactionsSection() {
           </div>
         ))}
       </div>
+
     </div>
   );
 }

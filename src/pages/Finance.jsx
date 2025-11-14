@@ -133,12 +133,12 @@ export default function Finance() {
       </div>
 
       <div className="flex items-center gap-3 mb-5">
-        {[1, 2, 3, 4].map((i) => (
+        {[1, 2, 3, 4, 5].map((i) => (
           <img
             key={i}
-            src={`/Images/Avatars/user-${i}.png`}
-            alt="User"
-            className="w-10 h-10 rounded-full border border-gray-200"
+            src={`/Images/Avatar/avatar-${i}.jpg`}
+            alt={`User ${i}`}
+            className="w-10 h-10 rounded-full border-2 border-white shadow-sm object-cover"
           />
         ))}
       </div>
@@ -250,7 +250,14 @@ export default function Finance() {
               ].map((t, i) => (
                 <tr key={i} className="border-b last:border-none">
                   <td className="py-3 px-4 font-medium text-gray-800">
-                    {t.name}
+                    <div className="flex items-center">
+                      <img 
+                        src={`/Images/Avatar/avatar-${(i % 5) + 1}.jpg`} 
+                        alt={t.name} 
+                        className="w-8 h-8 rounded-full mr-3 object-cover border border-gray-200"
+                      />
+                      <span>{t.name}</span>
+                    </div>
                   </td>
                   <td className="py-3 px-4 text-gray-500">{t.cat}</td>
                   <td className="py-3 px-4 text-gray-500">{t.date}</td>

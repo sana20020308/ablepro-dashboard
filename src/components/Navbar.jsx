@@ -81,9 +81,9 @@ export default function Navbar({ toggleSidebar, isSidebarOpen }) {
         {/* Avatar */}
         <div className="relative">
           <img
-            src="https://i.pravatar.cc/40"
+            src="/Images/Avatar/avatar-1.jpg"
             alt="User"
-            className="w-9 h-9 rounded-full border-2 border-white shadow-sm bg-blue-100"
+            className="w-9 h-9 rounded-full border-2 border-white shadow-sm object-cover"
           />
         </div>
       </div>
