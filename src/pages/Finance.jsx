@@ -22,7 +22,7 @@ export default function Finance() {
   const pieSeries = [44, 33, 23];
 
   return (
-    <div className="p-6 max-w-[1600px] mx-auto space-y-6 bg-[#f8fafc]">
+    <div className="p-4 sm:p-6 max-w-[1600px] mx-auto space-y-4 sm:space-y-6 bg-[#f8fafc] min-h-screen">
       {/* Breadcrumb + Title */}
       <div>
         <p className="text-sm text-gray-400">
@@ -34,13 +34,13 @@ export default function Finance() {
       {/* 🔥 ROW 1 → My Card (Left) + Transactions Section (Below My Card) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left Side */}
-        <div className="lg:col-span-4 space-y-6">
+        <div className="lg:col-span-4 space-y-4 sm:space-y-6">
           <MyCard />
           <TransactionsSection />
         </div>
 
         {/* Right Side */}
-        <div className="lg:col-span-8 space-y-6">
+        <div className="lg:col-span-8 space-y-4 sm:space-y-6">
           <TransactionCards />
 
           {/* Cashflow Chart */}

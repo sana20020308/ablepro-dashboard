@@ -26,7 +26,7 @@ function TransactionCard({
   const series = [{ name: "series1", data: [25, 40, 30, 45, 25, 40, 30] }];
 
   return (
-    <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-4 sm:p-5 hover:shadow-md transition-all duration-200 w-full">
+    <div className="bg-white border border-gray-200 rounded-xl sm:rounded-2xl shadow-sm p-3 sm:p-5 hover:shadow-md transition-all duration-200 w-full">
       {/* Header */}
       <div className="flex items-center justify-between mb-2">
         <div>
@@ -52,11 +52,11 @@ function TransactionCard({
       </div>
 
       {/* Footer */}
-      <div className="flex items-center justify-start gap-2 mt-3">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-start gap-1 sm:gap-2 mt-3">
         <h4 className="text-base sm:text-lg font-semibold text-gray-900">
           <span className="text-gray-500 text-sm">$</span>650k
         </h4>
-        <p className="text-xs sm:text-sm text-gray-500">Compare to last week</p>
+        <p className="text-xs text-gray-500">Compare to last week</p>
       </div>
     </div>
   );
@@ -64,20 +64,20 @@ function TransactionCard({
 
 export default function TransactionCards() {
   return (
-    <div className="grid grid-cols-12 gap-4 sm:gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
       {/* Card 1 */}
-      <div className="col-span-12 sm:col-span-6 lg:col-span-4">
-        <TransactionCard color="#22c55e" />
+      <div>
+        <TransactionCard color="#22c55e" title="Total Income" />
       </div>
 
       {/* Card 2 */}
-      <div className="col-span-12 sm:col-span-6 lg:col-span-4">
-        <TransactionCard color="#22c55e" />
+      <div>
+        <TransactionCard color="#22c55e" title="Total Expense" />
       </div>
 
       {/* Card 3 */}
-      <div className="col-span-12 sm:col-span-6 lg:col-span-4">
-        <TransactionCard color="#ef4444" />
+      <div>
+        <TransactionCard color="#ef4444" title="Total Savings" />
       </div>
     </div>
   );
