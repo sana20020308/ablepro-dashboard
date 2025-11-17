@@ -4,7 +4,7 @@ import { Search } from "lucide-react";
 import MyCard from "../components/MyCard";
 import TransactionCards from "../components/TransactionCards";
 import TransactionsSection from "../components/TransactionsSection";
-import CashflowChart from "../components/CashflowChart";
+import CashflowChart from "../components/charts/CashflowChart";
 import MoneySpentSection from "../components/MoneySpentSection";
 import AccountsSection from "../components/AccountsSection";
 import Navbar from "../components/Navbar";
