@@ -19,11 +19,13 @@ export default function Finance() {
     },
     dataLabels: { enabled: false },
   };
+
   const pieSeries = [44, 33, 23];
 
   return (
     <div className="p-4 sm:p-6 max-w-[1600px] mx-auto space-y-4 sm:space-y-6 bg-[#f8fafc] min-h-screen">
-      {/* Breadcrumb + Title */}
+
+      {/* Title + Breadcrumb */}
       <div>
         <p className="text-sm text-gray-400">
           Home / Dashboard / <span className="text-gray-700">Finance</span>
@@ -31,21 +33,23 @@ export default function Finance() {
         <h1 className="text-3xl font-semibold text-gray-900 mt-1">Finance</h1>
       </div>
 
-      {/* 🔥 ROW 1 → My Card (Left) + Transactions Section (Below My Card) */}
+      {/* ROW 1 – MyCard + TransactionsSection */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Left Side */}
-        <div className="lg:col-span-4 space-y-4 sm:space-y-6">
+
+        {/* LEFT SIDE (Stack on mobile) */}
+        <div className="lg:col-span-4 space-y-4 sm:space-y-6 w-full">
           <MyCard />
           <TransactionsSection />
         </div>
 
-        {/* Right Side */}
-        <div className="lg:col-span-8 space-y-4 sm:space-y-6">
+        {/* RIGHT SIDE */}
+        <div className="lg:col-span-8 space-y-4 sm:space-y-6 min-w-0">
+
           <TransactionCards />
 
-          {/* Cashflow Chart */}
-          <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-6">
-            <div className="flex justify-between items-center mb-4">
+          {/* Cashflow CHART */}
+          <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-4 sm:p-6 w-full">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-4">
               <div>
                 <h5 className="font-semibold text-gray-800 mb-1">Cashflow</h5>
                 <p className="text-sm text-gray-500 flex items-center gap-2">
@@ -55,151 +59,143 @@ export default function Finance() {
                   </span>
                 </p>
               </div>
-              <select className="border border-gray-300 rounded-md text-sm px-2 py-1 text-gray-600 focus:ring-1 focus:ring-blue-500">
+
+              <select className="border border-gray-300 rounded-md text-sm px-2 py-1 text-gray-600">
                 <option>Today</option>
                 <option>Weekly</option>
                 <option>Monthly</option>
               </select>
             </div>
 
-            <ReactApexChart
-              options={{
-                chart: { type: "bar", height: 230, toolbar: { show: false } },
-                plotOptions: {
-                  bar: {
-                    horizontal: false,
-                    columnWidth: "40%",
-                    borderRadius: 4,
+            <div className="w-full overflow-x-hidden">
+              <ReactApexChart
+                options={{
+                  chart: { type: "bar", height: 230, toolbar: { show: false } },
+                  plotOptions: {
+                    bar: { horizontal: false, columnWidth: "40%", borderRadius: 4 },
                   },
-                },
-                dataLabels: { enabled: false },
-                stroke: {
-                  show: true,
-                  width: 3,
-                  colors: ["transparent"],
-                },
-                colors: ["#4680ff", "rgba(70,128,255,0.4)"],
-                xaxis: {
-                  categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-                  labels: {
-                    style: {
-                      colors: "#64748b",
-                      fontSize: "12px",
-                      fontFamily: '"Public Sans", sans-serif',
+                  dataLabels: { enabled: false },
+                  stroke: { show: true, width: 3, colors: ["transparent"] },
+                  colors: ["#4680ff", "rgba(70,128,255,0.4)"],
+                  xaxis: {
+                    categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+                    labels: {
+                      style: {
+                        colors: "#64748b",
+                        fontSize: "12px",
+                        fontFamily: '"Public Sans", sans-serif',
+                      },
                     },
                   },
-                },
-                yaxis: { show: false },
-                grid: { borderColor: "#e5e7eb", strokeDashArray: 4 },
-                legend: {
-                  position: "top",
-                  horizontalAlign: "right",
-                  fontSize: "12px",
-                },
-                tooltip: { theme: "light" },
-              }}
-              series={[
-                { name: "Income", data: [25, 90, 70, 85, 100, 65] },
-                { name: "Expends", data: [15, 60, 40, 70, 80, 55] },
-              ]}
-              type="bar"
-              height={230}
-            />
+                  yaxis: { show: false },
+                  grid: { borderColor: "#e5e7eb", strokeDashArray: 4 },
+                  legend: {
+                    position: "top",
+                    horizontalAlign: "right",
+                    fontSize: "12px",
+                  },
+                  tooltip: { theme: "light" },
+                }}
+                series={[
+                  { name: "Income", data: [25, 90, 70, 85, 100, 65] },
+                  { name: "Expends", data: [15, 60, 40, 70, 80, 55] },
+                ]}
+                type="bar"
+                height={230}
+              />
+            </div>
           </div>
 
-          {/* Where Your Money Go */}
+          {/* WHERE YOUR MONEY GO */}
           <MoneySpentSection />
         </div>
       </div>
 
-     {/* ROW: Accounts + Quick Transfer + Category (3 Equal Cards) */}
-<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
+      {/* ROW 2 – Accounts / Quick Transfer / Category */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
 
-  {/* Accounts */}
-  <div className="lg:col-span-4">
-    <AccountsSection />
-  </div>
+        {/* Accounts */}
+        <div className="lg:col-span-4 w-full">
+          <AccountsSection />
+        </div>
 
-  {/* Quick Transfer */}
-  <div className="lg:col-span-4">
-    <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-6 h-full">
-      <div className="flex justify-between items-center mb-4">
-        <h5 className="text-base font-semibold text-gray-800">Quick Transfer</h5>
-        <select className="text-sm border border-gray-200 rounded-md px-2 py-1 text-gray-600">
-          <option>Today</option>
-          <option>Weekly</option>
-          <option>Monthly</option>
-        </select>
+        {/* Quick Transfer */}
+        <div className="lg:col-span-4">
+          <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-6 h-full">
+            <div className="flex justify-between items-center mb-4">
+              <h5 className="text-base font-semibold text-gray-800">Quick Transfer</h5>
+
+              <select className="text-sm border border-gray-200 rounded-md px-2 py-1 text-gray-600">
+                <option>Today</option>
+                <option>Weekly</option>
+                <option>Monthly</option>
+              </select>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3 mb-5">
+              {[1, 2, 3, 4, 5].map((i) => (
+                <img
+                  key={i}
+                  src={`/Images/Avatar/avatar-${i}.jpg`}
+                  alt={`User ${i}`}
+                  className="w-10 h-10 rounded-full border-2 border-white shadow-sm object-cover"
+                />
+              ))}
+            </div>
+
+            <ul className="space-y-4 text-sm">
+              <li className="flex justify-between">
+                <span className="text-gray-700">Starbucks Cafe</span>
+                <span className="text-red-500 font-semibold">-$26</span>
+              </li>
+              <li className="flex justify-between">
+                <span className="text-gray-700">Apple Inc.</span>
+                <span className="text-green-500 font-semibold">+$750.00</span>
+              </li>
+              <li className="flex justify-between">
+                <span className="text-gray-700">Ola Cabs</span>
+                <span className="text-red-500 font-semibold">-$26</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Category */}
+        <div className="lg:col-span-4">
+          <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-6 h-full">
+            <div className="flex justify-between items-center mb-3">
+              <h5 className="text-base font-semibold text-gray-800">Category</h5>
+
+              <select className="text-sm border border-gray-200 rounded-md px-2 py-1 text-gray-600">
+                <option>Today</option>
+                <option>Weekly</option>
+                <option>Monthly</option>
+              </select>
+            </div>
+
+            <div className="flex justify-center w-full overflow-hidden">
+              <ReactApexChart
+                options={pieOptions}
+                series={pieSeries}
+                type="donut"
+                height={200}
+              />
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div className="flex items-center gap-3 mb-5">
-        {[1, 2, 3, 4, 5].map((i) => (
-          <img
-            key={i}
-            src={`/Images/Avatar/avatar-${i}.jpg`}
-            alt={`User ${i}`}
-            className="w-10 h-10 rounded-full border-2 border-white shadow-sm object-cover"
-          />
-        ))}
-      </div>
-
-      <ul className="space-y-4 text-sm">
-        <li className="flex justify-between">
-          <span className="text-gray-700">Starbucks Cafe</span>
-          <span className="text-red-500 font-semibold">-$26</span>
-        </li>
-        <li className="flex justify-between">
-          <span className="text-gray-700">Apple Inc.</span>
-          <span className="text-green-500 font-semibold">+$750.00</span>
-        </li>
-        <li className="flex justify-between">
-          <span className="text-gray-700">Ola Cabs</span>
-          <span className="text-red-500 font-semibold">-$26</span>
-        </li>
-      </ul>
-    </div>
-  </div>
-
-  {/* Category */}
-  <div className="lg:col-span-4">
-    <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-6 h-full">
-      <div className="flex justify-between items-center mb-3">
-        <h5 className="text-base font-semibold text-gray-800">Category</h5>
-        <select className="text-sm border border-gray-200 rounded-md px-2 py-1 text-gray-600">
-          <option>Today</option>
-          <option>Weekly</option>
-          <option>Monthly</option>
-        </select>
-      </div>
-
-      <div className="flex justify-center">
-        <ReactApexChart
-          options={pieOptions}
-          series={pieSeries}
-          type="donut"
-          height={200}
-        />
-      </div>
-    </div>
-  </div>
-
-</div>
-
-
-      {/* Transaction History */}
-      <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-6">
+      {/* TRANSACTION HISTORY */}
+      <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-4 sm:p-6 w-full overflow-hidden">
         <div className="flex justify-between items-center mb-4">
           <h5 className="font-semibold text-gray-800">Transaction History</h5>
-          <a
-            className="text-blue-600 text-sm font-medium hover:underline"
-            href="#"
-          >
+          <a className="text-blue-600 text-sm font-medium hover:underline" href="#">
             View All
           </a>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="min-w-full text-sm">
+        <div className="overflow-x-auto w-full">
+          <table className="min-w-max text-sm">
             <thead>
               <tr className="text-gray-500 border-b">
                 <th className="py-3 px-4 text-left">USER NAME</th>
@@ -251,9 +247,9 @@ export default function Finance() {
                 <tr key={i} className="border-b last:border-none">
                   <td className="py-3 px-4 font-medium text-gray-800">
                     <div className="flex items-center">
-                      <img 
-                        src={`/Images/Avatar/avatar-${(i % 5) + 1}.jpg`} 
-                        alt={t.name} 
+                      <img
+                        src={`/Images/Avatar/avatar-${(i % 5) + 1}.jpg`}
+                        alt={t.name}
                         className="w-8 h-8 rounded-full mr-3 object-cover border border-gray-200"
                       />
                       <span>{t.name}</span>
@@ -285,6 +281,7 @@ export default function Finance() {
           </table>
         </div>
       </div>
+
     </div>
   );
 }
